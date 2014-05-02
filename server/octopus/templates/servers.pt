@@ -1,0 +1,33 @@
+
+<head>
+<title>Octopus IT Automation Tool</title>
+<script src="static/jquery.js"></script>
+<script src="static/funcoes.js"></script>
+</head>
+<h3>Octopus IT Automation Tool</h3>
+<fieldset>
+	<legend>servidores</legend>
+	<ul>
+		<li tal:repeat="s servidores">
+        	<input type="checkbox" id="${s._id}" class="nodes">${s._id} - ${s.ip}</input>
+    	</li>
+	</ul>
+</fieldset>
+<fieldset>
+	<legend>Grupos</legend>
+	<ul>
+		<li>Linux</li>
+		<li>Windows</li>
+		<li>BSD</li>
+	</ul>
+</fieldset>
+<fieldset>
+	<legend>Output</legend>
+	<textarea cols="50" rows="5"></textarea>
+</fieldset>
+<fieldset>
+	<legend>Console</legend>
+	<textarea placeholder="Digite um comando" cols="50"></textarea><br>
+	<input type="button" value="enviar" id="btn">
+</fieldset>
+
