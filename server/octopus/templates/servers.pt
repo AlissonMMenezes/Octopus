@@ -7,9 +7,13 @@
 <h3>Octopus IT Automation Tool</h3>
 <fieldset>
 	<legend>servidores</legend>
-	<ul>
-		<li tal:repeat="s servidores">
-        	<input type="checkbox" id="${s._id}" class="nodes">${s._id} - ${s.ip}</input>
+	<ul> 
+		<li tal:repeat="n nodes">${n.group}
+			<ul>
+        		<li>
+        			<input type="checkbox" id="${n._id}" class="nodes">${n._id} - ${n.ip}</input>
+        		</li>
+        	</ul>
     	</li>
 	</ul>
 </fieldset>
@@ -23,11 +27,23 @@
 </fieldset>
 <fieldset>
 	<legend>Output</legend>
-	<textarea cols="50" rows="5"></textarea>
+	<table border=1>
+	  <tr><td>Data</td><td>Node</td><td>Comando</td><td>Argumentos</td><td>Saida</td></tr>
+      <tr tal:repeat="l logs">
+      	<td>${l.data}</td><td>${l.node}</td><td>${l.comando}</td><td>${l.args}</td><td>${l.output}</td>
+      </tr>
+    </table>
 </fieldset>
 <fieldset>
-	<legend>Console</legend>
-	<textarea placeholder="Digite um comando" cols="50"></textarea><br>
-	<input type="button" value="enviar" id="btn">
+<legend>Input</legend>
+comandos no formato JSON:<br/>
+<textarea rows="5" cols="30" id="com_json">
+{
+	"node":"vmteste",
+	"command":"hostname",
+	"params":"-i"
+}
+</textarea><br>
+<input type="button" value="enviar" id="btn">
 </fieldset>
 

@@ -13,22 +13,26 @@
 import socket
 import os
 import time
-import commands
 import subprocess
 import urllib2
 import json
 import thread
+import re
+from time import *
 
-ip = commands.getoutput("ifconfig eth0| grep 'inet end' | awk '{print $3}'")
+ip = subprocess.Popen(["ifconfig eth0| grep 'inet end' | awk '{print $3}'"],stdout=subprocess.PIPE,shell=True).communicate()[0]
+m = re.compile("\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}")
+if not m.match(ip):
+	ip = subprocess.Popen(["ifconfig eth0| grep 'inet addr:' | cut -f 2 -d : | awk '{print $1}'"],stdout=subprocess.PIPE,shell=True).communicate()[0]
 
 #Variaveis de configuracao
 con = None
 max_host = 10000
 config = {'server':'','port':''}
-agent_config = {
-		'hostname':socket.gethostname(),
-		'ip':ip
-		}
+agent_config = { '_id':socket.gethostname(),
+				  'ip':ip,
+				  'group':'default'
+				}
 
 jsun = json.dumps(agent_config)
 if os.stat('octopus.config')[6] == 0:
@@ -49,37 +53,39 @@ def cadastra_agent(jsun):
 		req = urllib2.Request('http://'+config['server']+":8080/cadastrar",jsun,header)
 		handle = urllib2.urlopen(req)
 		res = str(handle.read())
-		if res == "OK":
+		if res == "cadastrado":
 			print "[+] Agent cadastrado no servidor"
 		else:
-			print "[!] Ocorreu um erro!"
+			print "[!] Erro ao cadastrar agent"
 	except Exception, e:
 		print "[!] Ocorreu um erro!"
 		print e
 
 def run_command(data):
 	try:
-		print "[-] Rodando comando: "+data
-		l = data.split(" ")
+		print "[-] Rodando comando: "+data		
+		l = data.split(" ",1)
+		print "============="
 		print l
 		ret = subprocess.Popen(l,stdout=subprocess.PIPE,shell=True).communicate()[0]
 		print "[-] Saida do comando: ",ret
-		d = {"output":ret}
+		hora = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+		d = {"data":hora, "node":agent_config['_id'],"comando":l[0],"args":l[1],"output":ret}
 		j = json.dumps(d)
 
 		#envia json para output
 		print "[-] Enviando retorno"
-        	header = {"Content-Type":"application/json; charset=utf-8"}
-        	req = urllib2.Request('http://'+config['server']+":8080/output",j,header)
-        	handle = urllib2.urlopen(req)
+		header = {"Content-Type":"application/json; charset=utf-8"}
+		req = urllib2.Request('http://'+config['server']+":8080/output",j,header)
+		handle = urllib2.urlopen(req)
 		res = str(handle.read())
-                if res == "OK":
-                        print "[+] Foi :D"
-                else:
-                        print "[!] Ocorreu um erro!"
-        except Exception, e:
-                print "[!] Ocorreu um erro!"
-                print e
+		if res == "salvo":
+			print "[+] Logs cadastrados"
+		else:
+			print "[!] Logs nao cadastrados"
+	except Exception, e:
+		print "[!] Ocorreu um erro!"
+		print e
 
 
 def criaServidor():

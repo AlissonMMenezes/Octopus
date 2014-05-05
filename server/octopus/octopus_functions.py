@@ -34,25 +34,38 @@ def con_db():
 
 def insert_crud(data):
 	print "inserindo: ",data
-	db = con_db()	
-	d = {"_id":data['_id']}
-	db.servers.update(d,data,True)
+	db = con_db()		
+	print "============"	
+	d = {}
+	d = json.dumps(data)
 	
+	db.nodes.update({'_id':data['_id']},data,upsert=True)
+	return "cadastrado"
+
+def insert_logs_crud(data):
+	db = con_db()
+	db.logs.insert(data)
+	return "salvo"
 
 def remove_crud():
 	print "remove"
 
-def retrieve_servers_crud(data):
+def retrieve_nodes_crud():
 	db = con_db()
-	servers = db.servers.find()
-	return servers
+	nodes = db.nodes.find()
+	return nodes
+
+def retrieve_logs_crud():
+	db = con_db()
+	logs = db.logs.find()
+	return logs
 
 def retrieve_crud(data,campo):
 	try:
 		db = con_db()
-		s = db.servers.find_one({'_id':data})
+		s = db.nodes.find_one({'_id':data})
 		print "[+] Campo: "+campo
-		print "[+] resultado: ",s
+		print "[+] resultado: ",s[campo]
 		return s[campo]
 	except Exception, e:
 		print "[!] Falhou!"
@@ -60,19 +73,19 @@ def retrieve_crud(data,campo):
 # EOF - CRUD
 
 #x02 - RN
-def comandos(com):
-	#path = "scripts/"
-	#commands = next(os.walk("scripts/"))[2]
-	#if "scripts" in com:
-	#	print commands
-	maquina = com.split(" ")[0].strip()
-	comando = com.split(" ",1)[1]
+def comandos(com):	
+	print "==============="
+	print com
+	print "==============="
+	maquina = com['node']
+	comando = com['command']+" "+com['params']
 
 	print "[+] servidor: "+maquina
 	print "[+] comando: "+comando
 	res = retrieve_crud(maquina,"ip")
 	print "[-] IP: ",res
-	envia_comando(res,comando)
+	thread.start_new_thread(envia_comando,(res,comando))	
+	return {'retorno':'enviado'}
 #EOF -- RN --
 
 #x03 -- Sockets ----
