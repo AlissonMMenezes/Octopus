@@ -36,7 +36,9 @@ def con_db():
 def insert_crud(data):
 	print "inserindo: ",data
 	db = con_db()		
-	db.nodes.update({"_id":data["_id"]},{"$addToSet":{"nodes":data["nodes"]}},upsert=True)
+	db.nodes.update({"_id":data["_id"]},
+					{"$addToSet":{"nodes":data["nodes"]}}
+					,upsert=True)
 	#db.nodes.save({"_id":data["_id"],}data)
 	return "cadastrado"
 
@@ -78,18 +80,27 @@ def retrieve_crud(data,campo):
 
 #x02 - RN
 def comandos(com):	
+	res = []
 	print "==============="
 	print com
 	print "==============="
-	maquina = com['node']
+	maquinas = com['nodes']
 	comando = com['command']+" "+com['params']
-
-	print "[+] servidor: "+maquina
-	print "[+] comando: "+comando
-	res = retrieve_crud(maquina,"ip")
-	print "[-] IP: ",res
-	thread.start_new_thread(envia_comando,(res,comando))	
-	return {'retorno':'enviado'}
+	print "========= MAQUINAS ======"
+	print maquinas
+	try:
+		for m in maquinas:
+			print "[+] servidor: "+m
+			res.append(retrieve_crud(m,"ip"))
+		print "[+] comando: "+comando	
+		for i in res:
+			print "[-] IP: ",i
+			thread.start_new_thread(envia_comando,(i,comando))	
+		
+		return {'retorno':'enviado'}
+	except Exception, e:
+		print "[!] Erro!"
+		print e
 #EOF -- RN --
 
 #x03 -- Sockets ----

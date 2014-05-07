@@ -5,31 +5,51 @@
 <script src="static/funcoes.js"></script>
 <link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
-<div id="header">
-	<h3>Octopus IT Automation Tool</h3>
-</div>
-<div id="grupos">
-	<div id="grupos-div-title">Grupos</div>
-	<ul tal:repeat="n nodes">		 
-		<div class="grupos-nome">${n._id}</div>
-			<li tal:repeat="b n.nodes">
-        		<div><input type="checkbox" id="${b.hostname}" class="nodes"> ${b.hostname} - ${b.ip}</input></div>
-        	</li>
-	</ul>
-</div>
-<div>
-<div id="input_box">
-	<div id="input_box_title">Input</div>
-	Nodes:<br/>
-	<div>Nenhum</div>
-	<input type="text" id="node">
-	<input type="text" id="comando">
-	<input type="text" id="args">
 
-	<br>
-	<input type="button" value="enviar" id="btn">
+<div id="header">
+	<div id="header-text">Octopus IT Automation Tool</div>
 </div>
+<div id="notify"><div id="notify_texto"></div></div>
 <div id="clear"></div>
+<div id="content">
+	<div id="grupos-box">
+		<div id="grupos-box-title">Grupos</div>
+		<div id="grupos-box-content">
+			<ul tal:repeat="n nodes">		 
+				<div class="grupos-nome">${n._id}</div>
+					<li tal:repeat="b n.nodes">
+		        		<div><input type="checkbox" id="${b.hostname}" class="nodes"> ${b.hostname} - ${b.ip}</input></div>
+		        	</li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="input-box">
+		<div id="input-box-title">Input</div>
+		<div id="input-box-content">
+			Nodes:<br/>
+			<div id="nodes-checked"></div>
+			<input type="text" id="comando" placeholder="comando">
+			<input type="text" id="args" placeholder="argumentos">	
+			<br>
+			<input type="button" value="enviar" id="btn">
+		</div>
+	</div>
+
+	<div id="feet-box">
+		<div id="feet-box-title">Feet</div>
+		<div id="feet-box-content">		
+			<ul>
+				<li>apache</li>
+				<li>mysql</li>
+				<li>tomcat</li>
+			</ul>
+		</div>
+	</div>
+
+
+	<div id="clear"></div>
+</div>
 <div id="output_box">
 	<div id="output_box_title">Output</div>
 	<table id="output">

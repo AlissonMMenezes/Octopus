@@ -20,6 +20,11 @@ import thread
 import re
 from time import *
 
+if not os.path.isdir("feet"):
+	os.mkdir("feet")
+else:
+	print "diretorio ja existe"
+
 ip = subprocess.Popen(["ifconfig eth0| grep 'inet end' | awk '{print $3}'"],stdout=subprocess.PIPE,shell=True).communicate()[0]
 m = re.compile("\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}")
 if not m.match(ip):
@@ -37,6 +42,7 @@ agent_config = { "_id":"default",
 				}
 
 jsun = json.dumps(agent_config)
+
 if os.stat('octopus.config')[6] == 0:
 	print '[!] Arquivo de configuracao vazio'
 	exit()
