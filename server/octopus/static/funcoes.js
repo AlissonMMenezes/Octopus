@@ -15,12 +15,14 @@ $(document).ready(function(){
 
 
 	$("#btn").click(function(){
-		var j = $.parseJSON($("#com_json").val());
-		console.log(j);
+		var n = $("#node").val();
+		var c = $("#comando").val();
+		var p = $("#args").val();
+		console.log(n+c+p)
 		$.ajax({
 				type: 'POST',
 				url: '/comando', //url to submit
-				data: JSON.stringify(j),
+				data: JSON.stringify({"node":n,"command":c,"params":p}),
 				contentType: 'application/json; charset=utf-8'
 				})
 				.done(function(JsonData){				

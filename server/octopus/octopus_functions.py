@@ -16,6 +16,7 @@
 import socket
 import json
 from pymongo import *
+import pymongo
 import thread
 import time
 import os
@@ -35,11 +36,8 @@ def con_db():
 def insert_crud(data):
 	print "inserindo: ",data
 	db = con_db()		
-	print "============"	
-	d = {}
-	d = json.dumps(data)
-	
-	db.nodes.update({'_id':data['_id']},data,upsert=True)
+	db.nodes.update({"_id":data["_id"]},{"$addToSet":{"nodes":data["nodes"]}},upsert=True)
+	#db.nodes.save({"_id":data["_id"],}data)
 	return "cadastrado"
 
 def insert_logs_crud(data):
@@ -57,16 +55,22 @@ def retrieve_nodes_crud():
 
 def retrieve_logs_crud():
 	db = con_db()
-	logs = db.logs.find()
+	logs = db.logs.find().sort("data",pymongo.DESCENDING).limit(20)
 	return logs
 
 def retrieve_crud(data,campo):
 	try:
 		db = con_db()
-		s = db.nodes.find_one({'_id':data})
+		#s = db.nodes.find_one({'_id':data})
+		s = db.nodes.aggregate([
+			    {"$project":{ "_id":0,"nodes.ip":1,"nodes.hostname":1}},
+			    { "$unwind":"$nodes" },
+			    { "$match":{"nodes.hostname":data}}
+			]);
+		res = s["result"][0]["nodes"][campo]		
 		print "[+] Campo: "+campo
-		print "[+] resultado: ",s[campo]
-		return s[campo]
+		print "[+] resultado: ",res
+		return res
 	except Exception, e:
 		print "[!] Falhou!"
 		print e

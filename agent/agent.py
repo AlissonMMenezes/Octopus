@@ -29,9 +29,11 @@ if not m.match(ip):
 con = None
 max_host = 10000
 config = {'server':'','port':''}
-agent_config = { '_id':socket.gethostname(),
-				  'ip':ip,
-				  'group':'default'
+agent_config = { "_id":"default",
+				 "nodes":{
+				 	"hostname":socket.gethostname(),
+				 	"ip":ip
+				 	}
 				}
 
 jsun = json.dumps(agent_config)
@@ -65,16 +67,13 @@ def run_command(data):
 	try:
 		print "[-] Rodando comando: "+data		
 		l = data.split(" ",1)
-		print "============="
-		print l
-		ret = subprocess.Popen(l,stdout=subprocess.PIPE,shell=True).communicate()[0]
+		ret = subprocess.Popen([data],stdout=subprocess.PIPE,shell=True).communicate()[0]
 		print "[-] Saida do comando: ",ret
 		hora = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-		d = {"data":hora, "node":agent_config['_id'],"comando":l[0],"args":l[1],"output":ret}
+		d = {"data":hora, "node":agent_config['nodes']['hostname'],"comando":l[0],"args":l[1],"output":ret}
 		j = json.dumps(d)
-
 		#envia json para output
-		print "[-] Enviando retorno"
+		print "[-] Enviando output"
 		header = {"Content-Type":"application/json; charset=utf-8"}
 		req = urllib2.Request('http://'+config['server']+":8080/output",j,header)
 		handle = urllib2.urlopen(req)

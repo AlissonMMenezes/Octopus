@@ -10,7 +10,7 @@ tmpl = "templates/"
 def index_view(request):
         nodes = o.retrieve_nodes_crud()
         logs = o.retrieve_logs_crud()
-        return {'nodes':nodes,"logs":logs}
+        return {"nodes":nodes,"logs":logs}
 
 @view_config(renderer="string",name="cadastrar")
 def cadastrar_view(request):

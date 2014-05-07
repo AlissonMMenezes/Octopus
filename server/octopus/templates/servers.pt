@@ -3,47 +3,39 @@
 <title>Octopus IT Automation Tool</title>
 <script src="static/jquery.js"></script>
 <script src="static/funcoes.js"></script>
+<link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
-<h3>Octopus IT Automation Tool</h3>
-<fieldset>
-	<legend>servidores</legend>
-	<ul> 
-		<li tal:repeat="n nodes">${n.group}
-			<ul>
-        		<li>
-        			<input type="checkbox" id="${n._id}" class="nodes">${n._id} - ${n.ip}</input>
-        		</li>
-        	</ul>
-    	</li>
+<div id="header">
+	<h3>Octopus IT Automation Tool</h3>
+</div>
+<div id="grupos">
+	<div id="grupos-div-title">Grupos</div>
+	<ul tal:repeat="n nodes">		 
+		<div class="grupos-nome">${n._id}</div>
+			<li tal:repeat="b n.nodes">
+        		<div><input type="checkbox" id="${b.hostname}" class="nodes"> ${b.hostname} - ${b.ip}</input></div>
+        	</li>
 	</ul>
-</fieldset>
-<fieldset>
-	<legend>Grupos</legend>
-	<ul>
-		<li>Linux</li>
-		<li>Windows</li>
-		<li>BSD</li>
-	</ul>
-</fieldset>
-<fieldset>
-	<legend>Output</legend>
-	<table border=1>
+</div>
+<div>
+<div id="input_box">
+	<div id="input_box_title">Input</div>
+	Nodes:<br/>
+	<div>Nenhum</div>
+	<input type="text" id="node">
+	<input type="text" id="comando">
+	<input type="text" id="args">
+
+	<br>
+	<input type="button" value="enviar" id="btn">
+</div>
+<div id="clear"></div>
+<div id="output_box">
+	<div id="output_box_title">Output</div>
+	<table id="output">
 	  <tr><td>Data</td><td>Node</td><td>Comando</td><td>Argumentos</td><td>Saida</td></tr>
       <tr tal:repeat="l logs">
       	<td>${l.data}</td><td>${l.node}</td><td>${l.comando}</td><td>${l.args}</td><td>${l.output}</td>
       </tr>
     </table>
-</fieldset>
-<fieldset>
-<legend>Input</legend>
-comandos no formato JSON:<br/>
-<textarea rows="5" cols="30" id="com_json">
-{
-	"node":"vmteste",
-	"command":"hostname",
-	"params":"-i"
-}
-</textarea><br>
-<input type="button" value="enviar" id="btn">
-</fieldset>
-
+</div>
