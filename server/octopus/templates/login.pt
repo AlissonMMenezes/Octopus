@@ -1,0 +1,17 @@
+<head>
+<title>Octopus IT Automation Tool</title>
+<link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+
+<form method="POST" action="/login">
+<div id="login-panel">
+	<div id="login-panel-title">Octopus WebGUI</div>
+	<div id="login-panel-content">
+		USER:<br/>
+		<input type="text" id="login" name="login" size="25"><br>
+		PASSWORD:<br/>
+		<input type="password" id="password" name="password" size="25"><br>
+		<input type="submit" value="login">
+	</div>
+</div>
+</form>

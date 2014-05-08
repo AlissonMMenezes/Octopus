@@ -5,22 +5,25 @@
 <script src="static/funcoes.js"></script>
 <link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
-
-<div id="header">
-	<div id="header-text">Octopus IT Automation Tool</div>
-</div>
-<div id="notify"><div id="notify_texto"></div></div>
-<div id="clear"></div>
-<div id="content">
+<section>
+	<div id="header">
+		<div id="header-text">Octopus IT Automation Tool</div>
+	</div>
+	<div id="notify"><div id="notify_texto"></div></div>
+</section>
+<section id="content">
+	<nav id="menu"><ul><li>Grupos</li><li>Feet</li><li>Nodes</li><li>Logs</li></ul></nav>
 	<div id="grupos-box">
 		<div id="grupos-box-title">Grupos</div>
 		<div id="grupos-box-content">
 			<ul tal:repeat="n nodes">		 
-				<div class="grupos-nome">${n._id}</div>
-					<li tal:repeat="b n.nodes">
-		        		<div><input type="checkbox" id="${b.hostname}" class="nodes"> ${b.hostname} - ${b.ip}</input></div>
-		        	</li>
+				<div class="grupos-nome" id="${n._id}">${n._id}</div>
+					<ul tal:repeat="b n.nodes">						
+		        		<li class="grupo-nome-${n._id}"><input type="checkbox" id="${b.hostname}" class="nodes"> ${b.hostname} - ${b.ip}</input></li>
+		        	</ul>
 			</ul>
+			<div id="novogrupo">+Grupo</div>
+			<div id="novogrupo-nome" style="display:none">Nome: <input type="text" name="nome-grupo" id="nome-grupo"><input type="button" value="cadastrar" id="btn-cadastrar-grupo"></div>
 		</div>
 	</div>
 
@@ -49,13 +52,13 @@
 
 
 	<div id="clear"></div>
-</div>
-<div id="output_box">
-	<div id="output_box_title">Output</div>
-	<table id="output">
-	  <tr><td>Data</td><td>Node</td><td>Comando</td><td>Argumentos</td><td>Saida</td></tr>
-      <tr tal:repeat="l logs">
-      	<td>${l.data}</td><td>${l.node}</td><td>${l.comando}</td><td>${l.args}</td><td>${l.output}</td>
-      </tr>
-    </table>
+</section>
+<div id="output-box">
+	<div id="output-box-title">Output</div>
+	<div id="output-box-content">
+		<tal:block tal:repeat="l logs">			
+	      	<div>Data: ${l.data} Node: ${l.node} Comando: ${l.comando} Args: ${l.args}</div>
+	      	<div id="output-box-content-out">Output: ${l.output}</div><br/>
+	     </tal:block>
+	</div>
 </div>

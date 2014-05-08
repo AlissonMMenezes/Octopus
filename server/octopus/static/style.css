@@ -59,13 +59,6 @@ body{
 	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-table {
-    background-color: #000000;
-    color: #21eb1f;
-}
-td {
-    padding: 3px 10px;
-}
 
 #header{
 	position: absolute;
@@ -82,21 +75,24 @@ td {
 	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-#output_box{
-	width:98%;
+#output-box-content{
+	background-color: #000000;
+    color: #21eb1f;
 }
-#content{
-	position: relative;
-	padding-top: 50px;
+#output-box-content-out{
+	word-wrap: break-word;
 }
-#grupos-box, #feet-box, #input-box, #output-box{	
+
+#grupos-box, #feet-box, #input-box{	
 	position: relative;
+	display:block;
 	border-radius: 5px;
 	border-style: solid;
 	border-color:#ecf0f1;
 	border-width: 1px;	
 	float: left;
-	margin: 10px;
+	margin-top: 70px;
+	margin-left:10px;
 	width: 300px;
 	color: #2c3e50;
 	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -115,7 +111,7 @@ td {
 }
 #clear{
 	clear:both;
-	position:relative;
+
 }
 
 #notify{
@@ -130,4 +126,49 @@ td {
 	position:relative;
 	margin-left: 50%;
 	font-size: 30px;
+}
+
+
+#login-panel{
+	margin: 10% 40%;
+	width: 300px;
+	border:1px solid;
+}
+
+#login-panel-title{
+	background-color:#2C3E50;
+	color:#FFF;
+}
+
+
+#login-panel-content, #login-panel-title{
+	padding: 15px;
+	margin: 0px auto;
+
+
+}
+
+#novogrupo:hover, .grupos-nome:hover{
+	width: 100%;
+	background-color:#ecf0f1;
+	color:#7b8a8b;
+	font-weight: bold;	
+}
+.novogrupo-clicado{
+	width: 100%;
+	background-color:#ecf0f1;
+	color:#7b8a8b;
+	font-weight: bold;	
+}
+
+#menu ul{
+	background-color:#EDEDED;
+	list-style:none;
+}
+
+#menu ul li{
+	display:inline;
+}
+#content{
+	
 }

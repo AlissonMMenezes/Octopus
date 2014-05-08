@@ -41,6 +41,11 @@ def insert_crud(data):
 					,upsert=True)
 	#db.nodes.save({"_id":data["_id"],}data)
 	return "cadastrado"
+def insert_grupo_crud(data):
+	db = con_db()	
+	j = { "_id":data["_id"], "nodes":[]}
+	db.nodes.insert(j)
+	return {"retorno":"cadastrado"}
 
 def insert_logs_crud(data):
 	db = con_db()

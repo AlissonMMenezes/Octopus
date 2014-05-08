@@ -28,6 +28,42 @@ $(document).ready(function(){
 			}
 	});
 
+	$("#novogrupo").click(function(){
+		$("#novogrupo-nome").slideToggle();		
+		if($("#novogrupo").hasClass("novogrupo-clicado")){
+			$("#novogrupo").removeClass("novogrupo-clicado");	
+		}else{
+			$("#novogrupo").addClass("novogrupo-clicado");	
+		}
+		
+	});
+
+	$("#btn-cadastrar-grupo").click(function(){
+		var nome = $("#nome-grupo").val();
+		$.ajax({
+				type: 'POST',
+				url: '/novo_grupo', //url to submit
+				data: JSON.stringify({"_id":nome}),
+				contentType: 'application/json; charset=utf-8'
+				})
+				.done(function(JsonData){			
+					$("#notify_texto").text(JsonData.retorno);
+					$("#notify").slideToggle();
+					$("#notify").delay(900);
+					$("#notify").slideToggle();
+				})
+				.fail(function(JsonData){
+					$("#notify").text("falhou");
+					$("#notify").slideToggle();
+					$("#notify").delay(300);
+					$("#notify").slideToggle();
+		});
+		
+	});
+
+	$(".grupos-nome").click(function(){
+		$(".grupo-nome-"+$(this).attr("id")).slideToggle();
+	})
 
 	$("#btn").click(function(){
 		var n = $("#node").val();
