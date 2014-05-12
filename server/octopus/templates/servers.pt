@@ -11,8 +11,9 @@
 	</div>
 	<div id="notify"><div id="notify_texto"></div></div>
 </section>
+
 <section id="content">
-	<nav id="menu"><ul><li>Grupos</li><li>Feet</li><li>Nodes</li><li>Logs</li></ul></nav>
+	<nav id="menu"><ul><li>Grupos</li><li>Feet</li><li>Nodes</li><li>Logs</li></ul></nav>	
 	<div id="grupos-box">
 		<div id="grupos-box-title">Grupos</div>
 		<div id="grupos-box-content">
@@ -45,11 +46,11 @@
 			<ul>
 				<li>apache</li>
 				<li>mysql</li>
-				<li>tomcat</li>
+				<li>tomcat</li>			
+    			<li><a href="${request.application_url}/logout">Logout</a></li>
 			</ul>
 		</div>
 	</div>
-
 
 	<div id="clear"></div>
 </section>

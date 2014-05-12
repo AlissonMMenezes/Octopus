@@ -3,15 +3,20 @@
 <link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
 
-<form method="POST" action="/login">
+<form method="POST" action="/">
 <div id="login-panel">
 	<div id="login-panel-title">Octopus WebGUI</div>
 	<div id="login-panel-content">
+		<span tal:replace="message"/><br>
 		USER:<br/>
-		<input type="text" id="login" name="login" size="25"><br>
+		<input type="text" id="login"
+                   name="login"
+                   value="${login}"/><br/>
 		PASSWORD:<br/>
-		<input type="password" id="password" name="password" size="25"><br>
-		<input type="submit" value="login">
+		<input type="password" id="password"
+                   name="password"
+                   value="${password}"/><br/>
+		<input type="submit" value="Log in" name="form.submitted">
 	</div>
 </div>
 </form>
