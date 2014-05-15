@@ -1,0 +1,46 @@
+<head>
+<title>Octopus IT Automation Tool</title>
+<script src="static/jquery.js"></script>
+<script src="static/jquery-ui.js"></script>
+<script src="static/grupos-funcoes.js"></script>
+<link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<div id="notify"><div id="notify_texto"></div></div>
+<div id="header">
+	<div id="header-text"><a href="/">Octopus IT Automation Tool</a></div>
+</div>
+<nav id="menu">
+	<ul>
+		<li><a href="/grupos">Grupos</a></li>
+		<li><a href="/feet">Feet</a></li>
+		<li><a href="#">Logs</a></li>
+		<li><a href="${request.application_url}/logout">Logout</a></li>
+	</ul>
+</nav>	
+<section>
+<tal:block tal:repeat="n nodes">
+<div id="grupos-box" class="grupos-drop">
+	<div id="grupos-box-title">${n._id}</div>
+	<div id="grupos-box-content">
+		<ul class="ul-sortable-list" style="min-height:40px">
+		<tal:block tal:repeat="b n.nodes">
+			<li class="grupo-nome-${n._id} grupos-nome">				
+				${b.hostname} - ${b.ip}				
+			</li>					
+		</tal:block>		
+		</ul>	
+	</div>
+	<div id="clean"></div>
+	<div id="grupos-box-title"><a href="#" class="excluir-grupo" id="${n._id}" >Excluir grupo</a></div>
+</div>
+</tal:block>
+<div id="clean"></div>
+<div id="clean"></div>
+<div id="grupos-box">
+	<div id="grupos-box-title">Novo Grupo</div>
+	<div id="grupos-box-content">
+	<div id="novogrupo-nome">
+		Nome: <input type="text" name="nome-grupo" id="nome-grupo">
+		<input type="button" value="cadastrar" id="btn-cadastrar-grupo"></div>
+	</div>
+</section>

@@ -1,0 +1,40 @@
+<head>
+<title>Octopus IT Automation Tool</title>
+<script src="static/jquery.js"></script>
+<script src="static/feet-funcoes.js"></script>
+<link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<div id="notify"><div id="notify_texto"></div></div>
+<div id="header">
+	<div id="header-text"><a href="/">Octopus IT Automation Tool</a></div>
+</div>
+<nav id="menu">
+	<ul>
+		<li><a href="/grupos">Grupos</a></li>
+		<li><a href="/feet">Feet</a></li>
+		<li><a href="#">Logs</a></li>
+		<li><a href="${request.application_url}/logout">Logout</a></li>
+	</ul>
+</nav>	
+<section>
+<div id="feet-box">
+	<div id="feet-box-title">Feet</div>
+	<div id="feet-box-content">
+		<ul tal:repeat="f feet">
+			<li>				
+				<a href="#" id="${f._id}" class="foot-name">${f._id}</a>
+			</li>					
+		</ul>	
+	</div>	
+	<div id="grupos-box-title" ><a href="#" id="novo-foot">Novo Foot</a></div>
+</div>
+<div id="code-box" style="margin-left:20px; margin-top:10px; float:left; display:none;">
+<div id="code-box-title">Foot Content</div>
+<div id="code-box-name"><input type="text" size="16" id="code-input-name"></div>
+<div>
+	<textarea cols="60" rows="20" placeholder="Codigo aqui!" id="code-box-textarea"></textarea>
+	<br/>
+	<input type="button" value="Salvar" id="save-code"><input type="button" value="Fechar" id="close-code">
+</div>
+</div>
+</section>

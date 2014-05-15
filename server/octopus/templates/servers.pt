@@ -5,26 +5,28 @@
 <script src="static/funcoes.js"></script>
 <link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
-<section>
-	<div id="header">
-		<div id="header-text">Octopus IT Automation Tool</div>
-	</div>
-	<div id="notify"><div id="notify_texto"></div></div>
-</section>
-
-<section id="content">
-	<nav id="menu"><ul><li>Grupos</li><li>Feet</li><li>Nodes</li><li>Logs</li></ul></nav>	
+<div id="notify"><div id="notify_texto"></div></div>
+<div id="header">
+	<div id="header-text">Octopus IT Automation Tool</div>
+</div>
+<nav id="menu">
+	<ul>
+		<li><a href="/grupos">Grupos</a></li>
+		<li><a href="/feet">Feet</a></li>
+		<li><a href="#">Logs</a></li>
+		<li><a href="${request.application_url}/logout">Logout</a></li>
+	</ul>
+</nav>	
+<section id="content">	
 	<div id="grupos-box">
 		<div id="grupos-box-title">Grupos</div>
 		<div id="grupos-box-content">
 			<ul tal:repeat="n nodes">		 
 				<div class="grupos-nome" id="${n._id}">${n._id}</div>
-					<ul tal:repeat="b n.nodes">						
-		        		<li class="grupo-nome-${n._id}"><input type="checkbox" id="${b.hostname}" class="nodes"> ${b.hostname} - ${b.ip}</input></li>
+					<ul tal:repeat="b n.nodes" >						
+		        		<li class="grupo-nome-${n._id}" style="display:none"><input type="checkbox" id="${b.hostname}" class="nodes"> ${b.hostname} - ${b.ip}</input></li>
 		        	</ul>
 			</ul>
-			<div id="novogrupo">+Grupo</div>
-			<div id="novogrupo-nome" style="display:none">Nome: <input type="text" name="nome-grupo" id="nome-grupo"><input type="button" value="cadastrar" id="btn-cadastrar-grupo"></div>
 		</div>
 	</div>
 
@@ -42,24 +44,23 @@
 
 	<div id="feet-box">
 		<div id="feet-box-title">Feet</div>
-		<div id="feet-box-content">		
-			<ul>
-				<li>apache</li>
-				<li>mysql</li>
-				<li>tomcat</li>			
-    			<li><a href="${request.application_url}/logout">Logout</a></li>
+		<div id="feet-box-content">					
+			<ul tal:repeat="f feet" id="feet-item">	
+				<li>${f._id}</li>	 
 			</ul>
 		</div>
 	</div>
-
-	<div id="clear"></div>
+<br/>
 </section>
-<div id="output-box">
-	<div id="output-box-title">Output</div>
-	<div id="output-box-content">
-		<tal:block tal:repeat="l logs">			
-	      	<div>Data: ${l.data} Node: ${l.node} Comando: ${l.comando} Args: ${l.args}</div>
-	      	<div id="output-box-content-out">Output: ${l.output}</div><br/>
-	     </tal:block>
+<section>
+	<div id="clear"></div>
+	<div id="output-box">
+		<div id="output-box-title">Output</div>
+		<div id="output-box-content">
+			<tal:block tal:repeat="l logs">			
+		      	<div>Data: ${l.data} Node: ${l.node} Comando: ${l.comando} Args: ${l.args}</div>
+		      	<div id="output-box-content-out">Output: ${l.output}</div><br/>
+		     </tal:block>
+		</div>
 	</div>
-</div>
+</section>

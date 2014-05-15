@@ -60,10 +60,47 @@ def retrieve_nodes_crud():
 	nodes = db.nodes.find()
 	return nodes
 
+def delete_group_crud(data):
+
+	if data['_id'] == 'default':
+		return {"retorno":"O Grupo default nao pode ser excluido"}
+		
+	db = con_db()
+	nodes = db.nodes.aggregate([
+			    {"$project":{ "_id":1,"nodes.ip":1,"nodes.hostname":1}},
+			    { "$unwind":"$nodes" },
+			    { "$match":data}
+			]);
+	print "#########################"
+	print nodes["result"]
+	for i in nodes['result']:
+		print "incluindo ",i['nodes']," para o grupo default!"
+		db.nodes.update({"_id":"default"},
+					{"$addToSet":{"nodes":i['nodes']}}
+					,upsert=True)
+	rem = db.nodes.remove(data)
+	
+	return {"retorno":"Grupo excluido"}
+
 def retrieve_logs_crud():
 	db = con_db()
 	logs = db.logs.find().sort("data",pymongo.DESCENDING).limit(20)
 	return logs
+
+def retrieve_feet_crud():
+	db = con_db()
+	feet = db.feet.find()
+	return feet
+
+def find_foot_crud(data):
+	db = con_db()
+	feet = db.feet.find_one(data)
+	return feet
+
+def add_foot_crud(data):
+	db = con_db()
+	r = db.feet.insert(data)
+	return {"retorno":"cadastrado com sucesso!"}
 
 def retrieve_crud(data,campo):
 	try:

@@ -1,67 +1,17 @@
-/*
-BEGIN CSS RESET
-*/
-
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+ {
+	margin:0;
+	padding:0;
+	list-style:none;
+	vertical-align:baseline;
 }
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
+
+
 body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-/*
-END CSS RESET
-*/
-/******************************************************************************************************************/
-body{
 	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-
-#header{
-	position: absolute;
+#header {
+	padding-top: 0px;
 	background-color:#2c3e50;
 	color: #ffffff;
 	border-style: solid;
@@ -69,30 +19,25 @@ body{
 	height: 50px;
 }
 
-#header-text{
+#header-text {
 	margin-top: 15px;
 	font-weight: bold;	
 	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
-#output-box-content{
-	background-color: #000000;
-    color: #21eb1f;
-}
-#output-box-content-out{
-	word-wrap: break-word;
+#header-text a:visited{
+	color: #ffffff;
 }
 
-#grupos-box, #feet-box, #input-box{	
+#grupos-box, #feet-box, #input-box {	
 	position: relative;
 	display:block;
 	border-radius: 5px;
 	border-style: solid;
 	border-color:#ecf0f1;
 	border-width: 1px;	
+	margin-top: 10px;
+	margin-left: 10px;
 	float: left;
-	margin-top: 70px;
-	margin-left:10px;
 	width: 300px;
 	color: #2c3e50;
 	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -100,8 +45,22 @@ body{
 	line-height: 1.428571429;
 
 }
-
-#grupos-box-title, #feet-box-title, #input-box-title, #output-box-title{
+#code-box{
+	position: relative;
+	display:block;
+	border-radius: 5px;
+	border-style: solid;
+	border-color:#ecf0f1;
+	border-width: 1px;	
+	margin-top: 10px;
+	margin-left: 10px;
+	float: left;
+	color: #2c3e50;
+	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 15px;
+	line-height: 1.428571429;
+}
+#grupos-box-title, #feet-box-title, #input-box-title, #output-box-title, #code-box-title {
 	background-color:#ecf0f1;
 	font-weight: bold;	
 	color:#7b8a8b;
@@ -109,12 +68,35 @@ body{
 	width:100%
 	overflow: hidden;
 }
-#clear{
+
+#grupos-box-content ul{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	list-style-position: inside;	
+}
+#grupos-box-content{
+
+}
+.grupos-nome{
+	margin-left:1px;
+}
+
+
+#output-box-content {
+	background-color: #000000;
+    color: #21eb1f;
+}
+#output-box-content-out {
+	word-wrap: break-word;
+}
+
+#clear {
 	clear:both;
 
 }
 
-#notify{
+#notify {
 	padding-top: 0px;
 	width:100%;
 	position:fixed;
@@ -122,53 +104,75 @@ body{
 	background-color:#21eb1f;
 	display:none;
 }
-#notify_texto{
+#notify_texto {
 	position:relative;
 	margin-left: 50%;
 	font-size: 30px;
 }
 
 
-#login-panel{
+#login-panel {
 	margin: 10% 40%;
 	width: 300px;
 	border:1px solid;
 }
 
-#login-panel-title{
+#login-panel-title {
 	background-color:#2C3E50;
 	color:#FFF;
 }
 
 
-#login-panel-content, #login-panel-title{
+#login-panel-content, #login-panel-title {
 	padding: 15px;
 	margin: 0px auto;
 
 
 }
 
-#novogrupo:hover, .grupos-nome:hover{
+#novogrupo:hover, .grupos-nome:hover {
 	width: 100%;
 	background-color:#ecf0f1;
 	color:#7b8a8b;
 	font-weight: bold;	
 }
-.novogrupo-clicado{
+.novogrupo-clicado {
 	width: 100%;
 	background-color:#ecf0f1;
 	color:#7b8a8b;
 	font-weight: bold;	
 }
 
-#menu ul{
+#menu ul {
+		padding:0px;
+		margin:0px;
+		background-color:#ecf0f1;
+		list-style:none;
+}
+
+#menu ul li {
+	display: inline;
+}
+
+#menu ul li a {
+    padding: 2px 10px;
+    display: inline-block;
+    background-color:#EDEDED;
+    color: #333;
+    text-decoration: none;
+    border-bottom:3px solid #EDEDED;
+}
+#menu ul li a:hover{
+	background-color:#2c3e50;
+	color: #ffffff;
+}
+
+#excluir-grupo a{
 	background-color:#EDEDED;
-	list-style:none;
+    color: #333;
 }
 
-#menu ul li{
-	display:inline;
-}
-#content{
-	
+#excluir-grupo a:hover{
+	background-color:#2c3e50;
+	color: #ffffff;
 }

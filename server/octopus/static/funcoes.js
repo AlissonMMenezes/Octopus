@@ -88,9 +88,6 @@ $(document).ready(function(){
 					$("#notify").delay(300);
 					$("#notify").slideToggle();
 		});
-
-
-
 	});
 
 });
