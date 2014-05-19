@@ -28,7 +28,7 @@ body {
 	color: #ffffff;
 }
 
-#grupos-box, #feet-box, #input-box {	
+#grupos-box, #feet-box, #input-box, #nodes-box, #node-box-info {	
 	position: relative;
 	display:block;
 	border-radius: 5px;
@@ -60,7 +60,7 @@ body {
 	font-size: 15px;
 	line-height: 1.428571429;
 }
-#grupos-box-title, #feet-box-title, #input-box-title, #output-box-title, #code-box-title {
+#grupos-box-title, #feet-box-title, #input-box-title, #output-box-title, #code-box-title,#nodes-box-title,#node-box-info-title {
 	background-color:#ecf0f1;
 	font-weight: bold;	
 	color:#7b8a8b;
@@ -69,15 +69,13 @@ body {
 	overflow: hidden;
 }
 
-#grupos-box-content ul{
+#grupos-box-content ul, #nodes-box-content ul, #feet-box-content ul{
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
 	list-style-position: inside;	
 }
-#grupos-box-content{
 
-}
 .grupos-nome{
 	margin-left:1px;
 }
@@ -130,7 +128,7 @@ body {
 
 }
 
-#novogrupo:hover, .grupos-nome:hover {
+#novogrupo:hover, .grupos-nome:hover, .nodes-name:hover, .foot-name:hover{
 	width: 100%;
 	background-color:#ecf0f1;
 	color:#7b8a8b;

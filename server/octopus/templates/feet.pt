@@ -12,6 +12,7 @@
 	<ul>
 		<li><a href="/grupos">Grupos</a></li>
 		<li><a href="/feet">Feet</a></li>
+		<li><a href="/nodes">Nodes</a></li>
 		<li><a href="#">Logs</a></li>
 		<li><a href="${request.application_url}/logout">Logout</a></li>
 	</ul>

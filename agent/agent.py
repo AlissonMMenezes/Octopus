@@ -19,16 +19,24 @@ import json
 import thread
 import re
 from time import *
+import platform
 
 if not os.path.isdir("feet"):
 	os.mkdir("feet")
 else:
 	print "diretorio ja existe"
 
-ip = subprocess.Popen(["ifconfig eth0| grep 'inet end' | awk '{print $3}'"],stdout=subprocess.PIPE,shell=True).communicate()[0]
-m = re.compile("\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}")
-if not m.match(ip):
-	ip = subprocess.Popen(["ifconfig eth0| grep 'inet addr:' | cut -f 2 -d : | awk '{print $1}'"],stdout=subprocess.PIPE,shell=True).communicate()[0]
+ps = ""
+if "Windows" in platform.platform():
+        ps = r"%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe"
+	ip = subprocess.Popen([ps,"ipconfig | findstr IPv4 | %{$_.split(':')[1]}"],stdout=subprocess.PIPE,shell=True).communicate()[0]
+else:
+	ip = subprocess.Popen(["ifconfig eth0| grep 'inet end' | awk '{print $3}'"],stdout=subprocess.PIPE,shell=True).communicate()[0]
+	m = re.compile("\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}")
+	if not m.match(ip):
+		ip = subprocess.Popen(["ifconfig eth0| grep 'inet addr:' | cut -f 2 -d : | awk '{print $1}'"],stdout=subprocess.PIPE,shell=True).communicate()[0]
+
+
 
 #Variaveis de configuracao
 con = None
@@ -48,8 +56,6 @@ if os.stat('octopus.config')[6] == 0:
 	exit()
 
 f = open('octopus.config','r')
-
-
 for line in f:
 	if '=' in line:
 		atrib = line.split('=')[0].strip()
@@ -57,6 +63,7 @@ for line in f:
 
 def cadastra_agent(jsun):
 	try:
+		print "[+] Servidor: "+config['server']
 		header = {"Content-Type":"application/json; charset=utf-8"}
 		req = urllib2.Request('http://'+config['server']+":8080/cadastrar",jsun,header)
 		handle = urllib2.urlopen(req)
@@ -66,7 +73,7 @@ def cadastra_agent(jsun):
 		else:
 			print "[!] Erro ao cadastrar agent"
 	except Exception, e:
-		print "[!] Ocorreu um erro!"
+		print "[!] Ocorreu um erro ao cadastrar o agent!"
 		print e
 
 def run_command(data):

@@ -61,7 +61,6 @@ def retrieve_nodes_crud():
 	return nodes
 
 def delete_group_crud(data):
-
 	if data['_id'] == 'default':
 		return {"retorno":"O Grupo default nao pode ser excluido"}
 		
@@ -113,6 +112,24 @@ def retrieve_crud(data,campo):
 			]);
 		res = s["result"][0]["nodes"][campo]		
 		print "[+] Campo: "+campo
+		print "[+] resultado: ",res
+		return res
+	except Exception, e:
+		print "[!] Falhou!"
+		print e
+
+def retrieve_node_info(data):
+	try:
+		print "================"
+		print data
+		db = con_db()
+		#s = db.nodes.find_one({'_id':data})
+		s = db.nodes.aggregate([
+			    {"$project":{ "_id":0,"nodes.ip":1,"nodes.hostname":1}},
+			    { "$unwind":"$nodes" },
+			    { "$match":{"nodes.hostname":data['hostname']}}
+			]);
+		res = s["result"][0]["nodes"]
 		print "[+] resultado: ",res
 		return res
 	except Exception, e:

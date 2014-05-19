@@ -1,0 +1,56 @@
+<head>
+<title>Octopus IT Automation Tool</title>
+<script src="static/jquery.js"></script>
+<script src="static/nodes-functions.js"></script>
+<link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<div id="notify"><div id="notify_texto"></div></div>
+<div id="header">
+	<div id="header-text"><a href="/">Octopus IT Automation Tool</a></div>
+</div>
+<nav id="menu">
+	<ul>
+		<li><a href="/grupos">Grupos</a></li>
+		<li><a href="/feet">Feet</a></li>
+		<li><a href="/nodes">Nodes</a></li>
+		<li><a href="#">Logs</a></li>
+		<li><a href="${request.application_url}/logout">Logout</a></li>
+	</ul>
+</nav>	
+<section>
+<div id="nodes-box">
+	<div id="nodes-box-title">Nodes</div>
+	<div id="nodes-box-content">
+		<tal:block repeat="n nodes">		 
+			<ul tal:repeat="b n.nodes" >						
+        		<li class="nodes-name" id="${b.hostname}">${b.hostname} - ${b.ip}</li>
+        	</ul>
+		</tal:block>	
+	</div>	
+</div>
+
+<div id="node-box-info">
+	<div id="node-box-info-title">Node Info</div>
+	<div>
+		<div>Hostname: <span id="node-hostname"></span></div>
+		<div>IP: <span id="node-ip"></span></div>
+		<div>S.O.: <span id="node-so"></span></div>
+		<div>Token: <span id="node-token"></span></div>
+		<div>Memoria: <span id="node-memoria"></span></div>
+		<div>Disco: <span id="node-disco"></span></div>
+		<div>Processador: <span id="node-processador"></span></div>
+		<div>Feet: <span id="node-feet"></span></div>
+		<div><input type="button" value="Salvar"> <input type="button" value="Cancelar"> </div>
+	</div>
+</div>
+
+<div id="feet-box">
+	<div id="feet-box-title">Feet</div>
+	<div id="feet-box-content">
+		<ul tal:repeat="f feet">
+			<li class="foot-name">${f._id}</li>					
+		</ul>	
+	</div>	
+</div>
+
+</section>

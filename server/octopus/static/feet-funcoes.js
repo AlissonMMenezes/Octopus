@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+	
 	$("#close-code").click(function(){
 		$("#code-box").slideToggle();
 	});
@@ -25,7 +25,8 @@ $(document).ready(function(){
 				data: JSON.stringify({"_id":nome}),
 				contentType: 'application/json; charset=utf-8'
 				})
-				.done(function(JsonData){							
+				.done(function(JsonData){	
+					$("#code-box-textarea").text("");						
 					$("#code-input-name").val(JsonData._id);
 					$("#code-box-textarea").text(JsonData.codigo);
 					$("#code-box").slideToggle();

@@ -21,26 +21,7 @@ class OctopusWeb(object):
 		nodes = o.retrieve_nodes_crud()
 		logs = o.retrieve_logs_crud()
 		feet = o.retrieve_feet_crud()
-
 		return {"nodes":nodes,"logs":logs,"feet":feet}
-
-	@view_config(renderer="string",name="cadastrar")
-	def cadastrar_view(self):
-		request = self.request
-		r = o.insert_crud(request.json_body)
-		return r
-
-	@view_config(renderer="json",name="new_group")
-	def novo_grupo_view(self):
-		request = self.request
-		r = o.insert_grupo_crud(request.json_body)
-		return r
-	@view_config(renderer="json",name="delete_group")
-	def delete_group_view(self):
-		request = self.request
-		data = request.json_body
-		r = o.delete_group_crud(data)
-		return r
 
 	@view_config(renderer="templates/grupos.pt",name="grupos", permission="admin")
 	def grupos_view(self):
@@ -51,6 +32,38 @@ class OctopusWeb(object):
 	def feet_view(self):
 		feet = o.retrieve_feet_crud()
 		return {"feet":feet}
+	
+	@view_config(renderer="templates/nodes.pt",name="nodes", permission="admin")
+	def nodes_view(self):
+		nodes = o.retrieve_nodes_crud()
+		feet = o.retrieve_feet_crud()
+		return {"nodes":nodes, "feet":feet}
+	
+	@view_config(renderer="json",name="node_info", permission="admin")
+	def node_info_view(self):
+		request = self.request
+		print request.json_body
+		node = o.retrieve_node_info(request.json_body)
+		return node
+
+
+	@view_config(renderer="string",name="cadastrar")
+	def cadastrar_view(self):
+		request = self.request
+		r = o.insert_crud(request.json_body)
+		return r
+
+	@view_config(renderer="json",name="new_group", permission="admin")
+	def novo_grupo_view(self):
+		request = self.request
+		r = o.insert_grupo_crud(request.json_body)
+		return r
+	@view_config(renderer="json",name="delete_group", permission="admin")
+	def delete_group_view(self):
+		request = self.request
+		data = request.json_body
+		r = o.delete_group_crud(data)
+		return r
 
 	@view_config(renderer="string",name="output")
 	def output_view(self):
@@ -65,14 +78,14 @@ class OctopusWeb(object):
 		r = o.comandos(a)
 		return r
 
-	@view_config(renderer="json", name="find_foot")
+	@view_config(renderer="json", name="find_foot", permission="admin")
 	def find_foot_view(self):	
 		request = self.request
 		data = request.json_body
 		r = o.find_foot_crud(data)
 		return r
 
-	@view_config(renderer="json", name="add_foot")
+	@view_config(renderer="json", name="add_foot",permission="admin")
 	def add_foot_view(self):	
 		request = self.request
 		data = request.json_body
