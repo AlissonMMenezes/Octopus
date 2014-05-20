@@ -50,13 +50,29 @@ $(document).ready(function(){
 				.done(function(JsonData){			
 					alert(JsonData.retorno);
 					$("#code-box").slideToggle();
+					window.location.reload();
 				})
 				.fail(function(JsonData){
 					alert("Erro!");
-		});
-		
+		});		
 	});
 
+	$(".remover-foot").click(function(){
+		var nome = $(this).attr("id");
+		$.ajax({
+				type: 'POST',
+				url: '/delete_foot', //url to submit
+				data: JSON.stringify({"_id":nome}),
+				contentType: 'application/json; charset=utf-8'
+				})
+				.done(function(JsonData){			
+					alert(JsonData.retorno);
+					window.location.reload();
+				})
+				.fail(function(JsonData){
+					alert("Erro!");
+		});		
+	});
 
 });
 

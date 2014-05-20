@@ -22,20 +22,20 @@
 	<div id="feet-box-title">Feet</div>
 	<div id="feet-box-content">
 		<ul tal:repeat="f feet">
-			<li>				
-				<a href="#" id="${f._id}" class="foot-name">${f._id}</a>
+			<li  class="foot-name" id="${f._id}">
+				<a href="#">${f._id}</a> <a href="#" style="float:right" class="remover-foot" id="${f._id}">remover</a>
 			</li>					
 		</ul>	
 	</div>	
 	<div id="grupos-box-title" ><a href="#" id="novo-foot">Novo Foot</a></div>
 </div>
-<div id="code-box" style="margin-left:20px; margin-top:10px; float:left; display:none;">
-<div id="code-box-title">Foot Content</div>
-<div id="code-box-name"><input type="text" size="16" id="code-input-name"></div>
-<div>
-	<textarea cols="60" rows="20" placeholder="Codigo aqui!" id="code-box-textarea"></textarea>
-	<br/>
-	<input type="button" value="Salvar" id="save-code"><input type="button" value="Fechar" id="close-code">
-</div>
+<div id="code-box" style="margin-left:20px; margin-top:10px; float:left; display:none; width:70%">
+	<div id="code-box-title">Foot Content</div>
+	<div id="code-box-name"><input type="text" size="16" id="code-input-name"></div>
+	<div>
+		<textarea cols="130" rows="20" placeholder="Codigo aqui!" id="code-box-textarea"></textarea>
+		<br/>
+		<input type="button" value="Salvar" id="save-code"><input type="button" value="Fechar" id="close-code">
+	</div>
 </div>
 </section>

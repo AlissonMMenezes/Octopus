@@ -45,7 +45,8 @@ config = {'server':'','port':''}
 agent_config = { "_id":"default",
 				 "nodes":{
 				 	"hostname":socket.gethostname(),
-				 	"ip":ip
+				 	"ip":ip,
+				 	"feet":[]
 				 	}
 				}
 
@@ -68,10 +69,7 @@ def cadastra_agent(jsun):
 		req = urllib2.Request('http://'+config['server']+":8080/cadastrar",jsun,header)
 		handle = urllib2.urlopen(req)
 		res = str(handle.read())
-		if res == "cadastrado":
-			print "[+] Agent cadastrado no servidor"
-		else:
-			print "[!] Erro ao cadastrar agent"
+		print "[+] Agent "+res
 	except Exception, e:
 		print "[!] Ocorreu um erro ao cadastrar o agent!"
 		print e

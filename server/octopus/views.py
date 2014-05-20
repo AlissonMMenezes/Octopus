@@ -7,6 +7,7 @@ from pyramid.view import view_config, forbidden_view_config
 import octopus_functions as o
 from pymongo import *
 from json import *
+import json
 
 tmpl = "templates/"
 
@@ -26,7 +27,8 @@ class OctopusWeb(object):
 	@view_config(renderer="templates/grupos.pt",name="grupos", permission="admin")
 	def grupos_view(self):
 		nodes = o.retrieve_nodes_crud()
-		return {"nodes":nodes}
+		feet = o.retrieve_feet_crud()
+		return {"nodes":nodes,"feet":feet}
 
 	@view_config(renderer="templates/feet.pt",name="feet", permission="admin")
 	def feet_view(self):
@@ -58,11 +60,31 @@ class OctopusWeb(object):
 		request = self.request
 		r = o.insert_grupo_crud(request.json_body)
 		return r
+
 	@view_config(renderer="json",name="delete_group", permission="admin")
 	def delete_group_view(self):
 		request = self.request
 		data = request.json_body
 		r = o.delete_group_crud(data)
+		return r
+
+	@view_config(renderer="json",name="delete_foot", permission="admin")
+	def delete_foot_view(self):
+		request = self.request
+		data = request.json_body
+		r = o.delete_foot_crud(data)
+		return r
+
+	@view_config(renderer="json",name="add_foot_to_node", permission="admin")
+	def add_foot_to_node_view(self):
+		request = self.request
+		r = o.add_foot_to_node(request.json_body)
+		return r
+
+	@view_config(renderer="json",name="add_foot_to_group", permission="admin")
+	def add_foot_to_group_view(self):
+		request = self.request
+		r = o.add_foot_to_group(request.json_body)
 		return r
 
 	@view_config(renderer="string",name="output")

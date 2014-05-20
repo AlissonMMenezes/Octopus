@@ -32,25 +32,27 @@
 <div id="node-box-info">
 	<div id="node-box-info-title">Node Info</div>
 	<div>
-		<div>Hostname: <span id="node-hostname"></span></div>
+		<div>Grupo: <span id="node-grupo"></span></div>
+		<div>Feet do grupo: <span id="node-grupo-feet"></span></div>
+		<div>Hostname: <span id="node-hostname">Nenhum selecionado</span></div>
 		<div>IP: <span id="node-ip"></span></div>
 		<div>S.O.: <span id="node-so"></span></div>
 		<div>Token: <span id="node-token"></span></div>
 		<div>Memoria: <span id="node-memoria"></span></div>
 		<div>Disco: <span id="node-disco"></span></div>
 		<div>Processador: <span id="node-processador"></span></div>
-		<div>Feet: <span id="node-feet"></span></div>
+		<div><div id="node-box-info-title">Feet</div>
+			<div id="node-feet"><span id="node-feet-item"></span></div>
+			<select id="select-feet">
+				<tal:block tal:repeat="f feet">
+					<option id="${f._id}">${f._id}</option>					
+				</tal:block>
+			</select>
+			<input type="button" value="adicionar" id="add-foot-to-node">
+		</div>
 		<div><input type="button" value="Salvar"> <input type="button" value="Cancelar"> </div>
 	</div>
 </div>
 
-<div id="feet-box">
-	<div id="feet-box-title">Feet</div>
-	<div id="feet-box-content">
-		<ul tal:repeat="f feet">
-			<li class="foot-name">${f._id}</li>					
-		</ul>	
-	</div>	
-</div>
 
 </section>

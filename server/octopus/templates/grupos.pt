@@ -23,13 +23,30 @@
 <div id="grupos-box" class="grupos-drop">
 	<div id="grupos-box-title">${n._id}</div>
 	<div id="grupos-box-content">
-		<ul class="ul-sortable-list" style="min-height:40px">
+		<ul class="ul-sortable-list" style="min-height:40px" id="${n._id}">
 		<tal:block tal:repeat="b n.nodes">
 			<li class="grupo-nome-${n._id} grupos-nome">				
 				${b.hostname} - ${b.ip}				
 			</li>					
 		</tal:block>		
 		</ul>	
+	</div>
+	<div>
+		<div id="node-box-info-title">Feet</div>
+		<div id="group-feet">
+			<span id="group-feet-item">
+				<tal:block switch="len(n.feet) <= 0">
+					<tal:block case="False">${n.feet}</tal:block>
+					<tal:block case="True">Nenhum</tal:block>
+				</tal:block>
+			</span>
+		</div>
+		<select id="select-feet">
+			<tal:block repeat="foot feet">
+				<option id="${foot._id}">${foot._id}</option>					
+			</tal:block>
+		</select>
+		<input type="button" value="adicionar" id="add-foot-to-node">
 	</div>
 	<div id="clean"></div>
 	<div id="grupos-box-title"><a href="#" class="excluir-grupo" id="${n._id}" >Excluir grupo</a></div>

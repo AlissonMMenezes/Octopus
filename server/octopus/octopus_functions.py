@@ -34,16 +34,23 @@ def con_db():
 	return db
 
 def insert_crud(data):
-	print "inserindo: ",data
+	print "Recebido: ",data
 	db = con_db()		
-	db.nodes.update({"_id":data["_id"]},
-					{"$addToSet":{"nodes":data["nodes"]}}
-					,upsert=True)
-	#db.nodes.save({"_id":data["_id"],}data)
-	return "cadastrado"
+	nodes = db.nodes.aggregate([
+			    {"$project":{ "_id":1,"nodes.ip":1,"nodes.hostname":1}},
+			    { "$unwind":"$nodes" },
+			    { "$match":{"_id":data["_id"]}}
+			]);
+	print "============================"
+	if data['nodes']['hostname'] in nodes['result'][0]['nodes']['hostname']:
+		print "[!] Agent ja cadastrado"
+		return "ja cadastrado!"
+	else:
+		db.nodes.update({"_id":data["_id"]},{"$addToSet":{"nodes":data["nodes"]}},upsert=True)
+		return "cadastrado"
 def insert_grupo_crud(data):
 	db = con_db()	
-	j = { "_id":data["_id"], "nodes":[]}
+	j = { "_id":data["_id"], "feet":[],"nodes":[]}
 	db.nodes.insert(j)
 	return {"retorno":"cadastrado"}
 
@@ -98,8 +105,28 @@ def find_foot_crud(data):
 
 def add_foot_crud(data):
 	db = con_db()
-	r = db.feet.insert(data)
+	r = db.feet.update({"_id":data['_id']},data,upsert=True)
 	return {"retorno":"cadastrado com sucesso!"}
+
+def delete_foot_crud(data):
+	db = con_db()
+	feet = db.feet.remove(data)
+	return {"retorno":"removido"}
+
+def add_foot_to_node(data):
+	db = con_db()
+	db.nodes.update({"_id":data['grupo'],"nodes.hostname":data['hostname']},
+					{"$addToSet":{"nodes.$.feet":data['foot']}}
+					,upsert=True)
+	return {"retorno":"Adicionado!"}
+
+def add_foot_to_group(data):
+	db = con_db()
+	db.nodes.update({"_id":data['grupo']},
+					{"$addToSet":{"feet":data['foot']}}
+					,upsert=True)
+	return {"retorno":"Adicionado!"}
+
 
 def retrieve_crud(data,campo):
 	try:
@@ -125,11 +152,11 @@ def retrieve_node_info(data):
 		db = con_db()
 		#s = db.nodes.find_one({'_id':data})
 		s = db.nodes.aggregate([
-			    {"$project":{ "_id":0,"nodes.ip":1,"nodes.hostname":1}},
+			    {"$project":{ "_id":1,"feet":1,"nodes.ip":1,"nodes.hostname":1,"nodes.feet":1}},
 			    { "$unwind":"$nodes" },
 			    { "$match":{"nodes.hostname":data['hostname']}}
 			]);
-		res = s["result"][0]["nodes"]
+		res = s["result"][0]
 		print "[+] resultado: ",res
 		return res
 	except Exception, e:
