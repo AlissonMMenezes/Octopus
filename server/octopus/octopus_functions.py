@@ -37,16 +37,19 @@ def insert_crud(data):
 	print "Recebido: ",data
 	db = con_db()		
 	nodes = db.nodes.aggregate([
-			    {"$project":{ "_id":1,"nodes.ip":1,"nodes.hostname":1}},
+			    {"$project":{ "_id":1,"nodes.ip":1,"nodes.hostname":1,"nodes.feet":1}},
 			    { "$unwind":"$nodes" },
 			    { "$match":{"_id":data["_id"]}}
 			]);
 	print "============================"
-	if data['nodes']['hostname'] in nodes['result'][0]['nodes']['hostname']:
-		print "[!] Agent ja cadastrado"
-		return "ja cadastrado!"
-	else:
+	print data['nodes']['hostname']
+	print nodes['result'][0]['nodes']['hostname']
+	print "============================"
+	if len(nodes['result']) <= 0 or data['nodes']['hostname'] not in nodes['result'][0]['nodes']['hostname']:
+		print "====== Entrou ========"
 		db.nodes.update({"_id":data["_id"]},{"$addToSet":{"nodes":data["nodes"]}},upsert=True)
+		return "Cadastrando agent"
+	else:
 		return "cadastrado"
 def insert_grupo_crud(data):
 	db = con_db()	

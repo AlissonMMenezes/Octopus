@@ -43,7 +43,6 @@ con = None
 max_host = 10000
 config = {'server':'','port':''}
 agent_config = { "_id":"default",
-				 "feet":[],
 				 "nodes":{
 				 	"hostname":socket.gethostname(),
 				 	"ip":ip,
