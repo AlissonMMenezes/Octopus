@@ -42,15 +42,35 @@ def insert_crud(data):
 			    { "$match":{"_id":data["_id"]}}
 			]);
 	print "============================"
-	print data['nodes']['hostname']
-	print nodes['result'][0]['nodes']['hostname']
+	print data['nodes']['ip']
+	for f in nodes['result']:
+		print f['nodes']['ip']
 	print "============================"
-	if len(nodes['result']) <= 0 or data['nodes']['hostname'] not in nodes['result'][0]['nodes']['hostname']:
-		print "====== Entrou ========"
+
+	if len(nodes['result']) <= 0:
+		print "Nenhum agent cadastrado"
 		db.nodes.update({"_id":data["_id"]},{"$addToSet":{"nodes":data["nodes"]}},upsert=True)
-		return "Cadastrando agent"
+		return "Cadastrando agent!!!"
 	else:
-		return "cadastrado"
+		e = 0
+		print "Entrou aqui"
+		for f in nodes['result']:
+			print "ips: ",f['nodes']['ip']
+			if data['nodes']['ip'] in f['nodes']['ip']:
+				print "Existe"
+				db.nodes.update({"_id":data['_id'],"nodes.ip":data['nodes']['ip']},
+				{"$set":{"nodes.$":data['nodes']}})
+				retorno = "Atualizando agent"
+				e = 1
+				break
+			else:
+				print "Nao existe"
+				retorno = "Novo agent"
+		if e != 1:
+			db.nodes.update({"_id":data["_id"]},{"$addToSet":{"nodes":data["nodes"]}},upsert=True)
+		return retorno
+		
+
 def insert_grupo_crud(data):
 	db = con_db()	
 	j = { "_id":data["_id"], "feet":[],"nodes":[]}
