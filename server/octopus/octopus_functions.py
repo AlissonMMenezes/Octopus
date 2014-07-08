@@ -58,8 +58,7 @@ def insert_crud(data):
 			print "ips: ",f['nodes']['ip']
 			if data['nodes']['ip'] in f['nodes']['ip']:
 				print "Existe"
-				db.nodes.update({"_id":data['_id'],"nodes.ip":data['nodes']['ip']},
-				{"$set":{"nodes.$":data['nodes']}})
+				db.nodes.update({"_id":data['_id'],"nodes.ip":data['nodes']['ip']},{"$set":{"nodes.$":data['nodes']}})
 				retorno = "Atualizando agent"
 				e = 1
 				break
@@ -144,6 +143,13 @@ def add_foot_to_node(data):
 	return {"retorno":"Adicionado!"}
 
 def add_foot_to_group(data):
+	db = con_db()
+	db.nodes.update({"_id":data['grupo']},
+					{"$addToSet":{"feet":data['foot']}}
+					,upsert=True)
+	return {"retorno":"Adicionado!"}
+
+def remove_foot_from_group(data):
 	db = con_db()
 	db.nodes.update({"_id":data['grupo']},
 					{"$addToSet":{"feet":data['foot']}}

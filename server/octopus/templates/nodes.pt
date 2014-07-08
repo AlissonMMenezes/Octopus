@@ -4,55 +4,44 @@
 <script src="static/nodes-functions.js"></script>
 <link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
-<div id="notify"><div id="notify_texto"></div></div>
-<div id="header">
-	<div id="header-text"><a href="/">Octopus IT Automation Tool</a></div>
-</div>
-<nav id="menu">
-	<ul>
-		<li><a href="/grupos">Grupos</a></li>
-		<li><a href="/feet">Feet</a></li>
-		<li><a href="/nodes">Nodes</a></li>
-		<li><a href="#">Logs</a></li>
-		<li><a href="${request.application_url}/logout">Logout</a></li>
-	</ul>
-</nav>	
-<section>
-<div id="nodes-box">
-	<div id="nodes-box-title">Nodes</div>
-	<div id="nodes-box-content">
+<metal:block use-macro="layout">
+	<metal:block fill-slot="content">
+		<section>
+		<div id="nodes-box">
+		<div id="nodes-box-title">Nodes</div>
+		<div id="nodes-box-content">
 		<tal:block repeat="n nodes">		 
 			<ul tal:repeat="b n.nodes" >						
-        		<li class="nodes-name" id="${b.hostname}">${b.hostname} - ${b.ip}</li>
-        	</ul>
+				<li class="nodes-name" id="${b.hostname}">${b.hostname}</li>
+			</ul>
 		</tal:block>	
-	</div>	
-</div>
-
-<div id="node-box-info">
-	<div id="node-box-info-title">Node Info</div>
-	<div>
-		<div>Grupo: <span id="node-grupo"></span></div>
-		<div>Feet do grupo: <span id="node-grupo-feet"></span></div>
-		<div>Hostname: <span id="node-hostname">Nenhum selecionado</span></div>
-		<div>IP: <span id="node-ip"></span></div>
-		<div>S.O.: <span id="node-so"></span></div>
-		<div>Token: <span id="node-token"></span></div>
-		<div>Memoria: <span id="node-memoria"></span></div>
-		<div>Disco: <span id="node-disco"></span></div>
-		<div>Processador: <span id="node-processador"></span></div>
-		<div><div id="node-box-info-title">Feet</div>
-			<div id="node-feet"><span id="node-feet-item"></span></div>
-			<select id="select-feet">
-				<tal:block tal:repeat="f feet">
-					<option id="${f._id}">${f._id}</option>					
-				</tal:block>
-			</select>
-			<input type="button" value="adicionar" id="add-foot-to-node">
+		</div>	
 		</div>
-		<div><input type="button" value="Salvar"> <input type="button" value="Cancelar"> </div>
-	</div>
-</div>
 
-
-</section>
+		<div id="node-box-info">
+			<div id="node-box-info-title">Node Info</div>
+			<div>
+				<div>Grupo: <span id="node-grupo"></span></div>
+				<div>Feet do grupo: <span id="node-grupo-feet"></span></div>
+				<div>Hostname: <span id="node-hostname">Nenhum selecionado</span></div>
+				<div>IP: <span id="node-ip"></span></div>
+				<div>S.O.: <span id="node-so"></span></div>
+				<div>Token: <span id="node-token"></span></div>
+				<div>Memoria: <span id="node-memoria"></span></div>
+				<div>Disco: <span id="node-disco"></span></div>
+				<div>Processador: <span id="node-processador"></span></div>
+				<div><div id="node-box-info-title">Feet</div>
+					<div id="node-feet"><span id="node-feet-item"></span></div>
+					<select id="select-feet">
+						<tal:block tal:repeat="f feet">
+							<option id="${f._id}">${f._id}</option>					
+						</tal:block>
+					</select>
+					<input type="button" value="adicionar" id="add-foot-to-node">
+				</div>
+				<div><input type="button" value="Salvar"> <input type="button" value="Cancelar"> </div>
+			</div>
+		</div>
+		</section>
+	</metal:block>
+</metal:block>

@@ -62,6 +62,7 @@ for line in f:
 	if '=' in line:
 		atrib = line.split('=')[0].strip()
 		config[atrib] = line.split('=')[1].strip()
+f.close
 
 def cadastra_agent(jsun):
 	try:

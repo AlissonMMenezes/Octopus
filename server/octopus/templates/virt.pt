@@ -1,0 +1,61 @@
+<head>
+<title>Octopus IT Automation Tool</title>
+<script src="static/jquery.js"></script>
+<script src="static/funcoes.js"></script>
+<script src="static/virt-funcoes.js"></script>
+<link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<metal:block use-macro="layout">
+	<metal:block fill-slot="content">
+		<section id="content">
+		<div id="menu-virt">
+			<div id="menu-virt-title">Menu</div>
+			<div id="menu-virt-content">
+				<ul>
+					<li class="virt-menu-item">Virtual Machines</li>
+					<li class="virt-menu-item">Network</li>
+					<li class="virt-menu-item">Storages</li>
+					<li class="virt-menu-item">Hypervisors</li>
+				</ul>
+			</div>
+		</div>	
+		
+		<div id="vms-box-lista">
+		<div id="vms-box-lista-title">VMs</div>	
+		<div id="vms-box-content">		
+			<table >
+				<tr><td><button>Nova</button></td></tr>
+				<tr><td>Nome</td><td>Status</td><td>vCPUs</td><td>Memoria</td><td>Ação</td></tr>
+				<tal:block tal:repeat="v AllVms">
+					<tr class="vms-box-item">
+						<td id="vm-name">${v.name()}</td>
+						<td>
+							<tal:block switch="v.state()[0]">
+								<tal:block case="1">Ligado</tal:block>
+								<tal:block case="3">Pausado</tal:block>
+								<tal:block case="5">Desligado</tal:block>
+							</tal:block>
+						</td>
+						<td>${v.vcpusFlags()}</td>
+						<td>${v.maxMemory()/1024}</td>
+						<td>
+							<select class="vm-action" id="${v.name()}">
+								<option>Selecione</option>
+								<option value="on">Ligar</option>
+								<option value="off">Desligar</option>
+								<option value="reboot">Reiniciar</option>
+								<option value="resume">Resume</option>
+								<option value="pause">Pausar</option>
+								<option>Apagar</option>
+							</select>
+						</td>
+						<td><button class="acessar_console" id="${v.name()}">Acessar console</button></td>
+					</tr>
+				</tal:block>		
+			</table>
+		</div>
+		</div>
+		</section>
+	</metal:block>
+</metal:block>
+

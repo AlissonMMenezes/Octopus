@@ -1,0 +1,25 @@
+<head>
+<title>Octopus IT Automation Tool</title>
+<script src="static/jquery.js"></script>
+<script src="static/funcoes.js"></script>
+<link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<metal:block use-macro="layout">
+	<metal:block fill-slot="content">
+		<section id="content">	
+			<div id="bacula-box">
+				<div id="bacula-box-title">Bacula</div>
+				<div id="bacula-box-content">
+					<ul>
+						<li class="bacula-name" ><a href="#">Clients</a></li>
+						<li class="bacula-name" ><a href="#">Jobs</a></li>
+						<li class="bacula-name" ><a href="#">Schedules</a></li>
+						<li class="bacula-name" ><a href="#">Volumes</a></li>
+						<li class="bacula-name" ><a href="#">Pools</a></li>
+						<li class="bacula-name" ><a href="#">Storages</a></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+	</metal:block>
+</metal:block>

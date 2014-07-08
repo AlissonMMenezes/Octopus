@@ -5,24 +5,14 @@
 <script src="static/grupos-funcoes.js"></script>
 <link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
-<div id="notify"><div id="notify_texto"></div></div>
-<div id="header">
-	<div id="header-text"><a href="/">Octopus IT Automation Tool</a></div>
-</div>
-<nav id="menu">
-	<ul>
-		<li><a href="/grupos">Grupos</a></li>
-		<li><a href="/feet">Feet</a></li>
-		<li><a href="/nodes">Nodes</a></li>
-		<li><a href="#">Logs</a></li>
-		<li><a href="${request.application_url}/logout">Logout</a></li>
-	</ul>
-</nav>	
-<section>
+
+<metal:block use-macro="layout">
+	<metal:block fill-slot="content">
+		<section>
 <tal:block tal:repeat="n nodes">
-<div id="grupos-box" class="grupos-drop">
-	<div id="grupos-box-title">${n._id}</div>
-	<div id="grupos-box-content">
+	<div id="grupos-box" class="grupos-drop">
+		<div id="grupos-box-title">${n._id}</div>
+		<div id="grupos-box-content">
 		<ul class="ul-sortable-list" style="min-height:40px" id="${n._id}">
 		<tal:block tal:repeat="b n.nodes">
 			<li class="grupo-nome-${n._id} grupos-nome">				
@@ -40,13 +30,14 @@
 					<tal:block case="True">Nenhum</tal:block>
 				</tal:block>
 			</span>
-		</div>
+		</div>		
 		<select id="select-feet">
-			<tal:block repeat="foot feet">
-				<option id="${foot._id}">${foot._id}</option>					
+			<tal:block repeat="foot feet">				
+				<option id="${foot._id}">${foot._id}</option>									
 			</tal:block>
 		</select>
-		<input type="button" value="adicionar" id="add-foot-to-node">
+		<input type="button" value="adicionar" id="add-foot-to-group">
+		<input type="button" value="remover" id="remove-foot-from-group">
 	</div>
 	<div id="clean"></div>
 	<div id="grupos-box-title"><a href="#" class="excluir-grupo" id="${n._id}" >Excluir grupo</a></div>
@@ -62,3 +53,5 @@
 		<input type="button" value="cadastrar" id="btn-cadastrar-grupo"></div>
 	</div>
 </section>
+	</metal:block>
+</metal:block>

@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      metal:define-macro="base">
+<body>
+	<div id="notify"><div id="notify_texto"></div></div>
+	<div id="header">
+		<div id="header-text"><a href="/">Octopus IT Automation Tool</a></div>
+	</div>
+	<nav id="menu">
+		<ul>
+			<li><a href="/virt">Virt</a></li>
+			<li><a href="/grupos">Grupos</a></li>
+			<li><a href="/feet">Feet</a></li>
+			<li><a href="/nodes">Nodes</a></li>
+			<li><a href="#">Logs</a></li>
+			<li><a href="/bacula">Bacula</a></li>
+			<li><a href="${request.application_url}/logout">Logout</a></li>
+		</ul>
+	</nav>	
+	<div metal:define-slot="content"></div>
+</body>
+</html>

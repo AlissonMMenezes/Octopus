@@ -28,7 +28,7 @@ body {
 	color: #ffffff;
 }
 
-#grupos-box, #feet-box, #input-box, #nodes-box, #node-box-info {	
+#grupos-box, #feet-box, #input-box, #nodes-box, #node-box-info, #bacula-box, #menu-virt {	
 	position: relative;
 	display:block;
 	border-radius: 5px;
@@ -45,7 +45,9 @@ body {
 	line-height: 1.428571429;
 
 }
-#code-box{
+
+
+#code-box, #vms-box-lista{
 	position: relative;
 	display:block;
 	border-radius: 5px;
@@ -59,8 +61,9 @@ body {
 	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 15px;
 	line-height: 1.428571429;
+	
 }
-#grupos-box-title, #feet-box-title, #input-box-title, #output-box-title, #code-box-title,#nodes-box-title,#node-box-info-title {
+#grupos-box-title, #feet-box-title, #input-box-title, #output-box-title, #code-box-title, #nodes-box-title,#node-box-info-title, #bacula-box-title,#menu-virt-title, #vms-box-lista-title {
 	background-color:#ecf0f1;
 	font-weight: bold;	
 	color:#7b8a8b;
@@ -69,7 +72,7 @@ body {
 	overflow: hidden;
 }
 
-#grupos-box-content ul, #nodes-box-content ul, #feet-box-content ul{
+#grupos-box-content ul, #nodes-box-content ul, #feet-box-content ul, #bacula-box-content ul, #menu-virt-content ul{
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
@@ -128,12 +131,18 @@ body {
 
 }
 
-#novogrupo:hover, .grupos-nome:hover, .nodes-name:hover, .foot-name:hover{
+#novogrupo:hover, .grupos-nome:hover, .nodes-name:hover, .foot-name:hover, .bacula-name:hover, .virt-menu-item:hover{
 	width: 100%;
 	background-color:#ecf0f1;
 	color:#7b8a8b;
 	font-weight: bold;	
 }
+
+.vms-box-item:hover{
+	background-color:#ecf0f1;
+	color:#7b8a8b;
+}
+
 .novogrupo-clicado {
 	width: 100%;
 	background-color:#ecf0f1;
