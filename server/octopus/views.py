@@ -177,6 +177,13 @@ class OctopusWeb(object):
 		request = self.request
 		r = v.access_console(request.json_body)
 		return r
+
+	@view_config(renderer="json", name="get_networks",permission="admin")
+	def getnetworks_view(self):	
+		request = self.request
+		r = v.get_networks(request.json_body)
+		return r
+
 	#x05 - Fim da Sessao de Virtualizacao
 
 	#x06 - Bacula -

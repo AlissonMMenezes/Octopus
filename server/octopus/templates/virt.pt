@@ -12,14 +12,14 @@
 			<div id="menu-virt-title">Menu</div>
 			<div id="menu-virt-content">
 				<ul>
-					<li class="virt-menu-item">Virtual Machines</li>
-					<li class="virt-menu-item">Network</li>
-					<li class="virt-menu-item">Storages</li>
-					<li class="virt-menu-item">Hypervisors</li>
+					<li class="virt-menu-item" id="vm-menu">Virtual Machines</li>
+					<li class="virt-menu-item" id="net-menu">Network</li>
+					<li class="virt-menu-item" id="stor-menu">Storages</li>
+					<li class="virt-menu-item" id="hyper-menu">Hypervisors</li>
 				</ul>
 			</div>
 		</div>	
-		
+		<section id="main" class="sect">
 		<div id="vms-box-lista">
 		<div id="vms-box-lista-title">VMs</div>	
 		<div id="vms-box-content">		
@@ -55,6 +55,40 @@
 			</table>
 		</div>
 		</div>
+		</section>
+		<section id="network" class="sect" style="display:none;">
+			<div id="vms-box-lista">
+				<div id="vms-box-lista-title">Networks</div>	
+				<div id="vms-box-content">		
+					<button>Nova</button>
+					<div>REDES!</div>
+				</div>
+			</div>
+		</section>
+		<section id="storages" class="sect" style="display:none;">
+			<div id="vms-box-lista">
+			<div id="vms-box-lista-title">Storages</div>	
+			<div id="vms-box-content">		
+				<table >
+					<tr><td><button>Nova</button></td></tr>
+					<div>Storages!</div>		
+				</table>
+			</div>
+			</div>
+		</section>
+		<section id="hypervisors" class="sect" style="display:none;">
+			<div id="vms-box-lista">
+			<div id="vms-box-lista-title">Hypervisors</div>	
+			<div id="vms-box-content">		
+				<table >
+					<tr><td><button>Nova</button></td></tr>
+					<div>Hypers!</div>		
+				</table>
+			</div>
+			</div>
+		</section>
+
+
 		</section>
 	</metal:block>
 </metal:block>

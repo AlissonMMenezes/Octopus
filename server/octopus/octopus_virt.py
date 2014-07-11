@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 # Octopus - IT Automation Tool
-# Arquivo que cotrola a LibVirt para criar maquinas virtuais
+# Arquivo que controla a LibVirt para criar maquinas virtuais
 # Coded by: Alisson Menezes
 #		- alisson.copyleft@gmail.com
 #		
@@ -12,6 +12,7 @@
 import libvirt
 import xml.etree.ElementTree as ET
 import os
+import pprint
 
 def con_hypervisor():
 	conn = libvirt.open("qemu:///system")
@@ -64,6 +65,24 @@ def access_console(data):
 		port = f.get('port')
 	os.remove(info.name()+".xml")
 	return {"retorno":port}
+
+def get_networks(data):
+	l = []
+	c = con_hypervisor()
+	nets = c.listAllNetworks()
+	pprint.pprint(dir(nets))
+	for n in nets:
+	 	f = open(n.name()+".xml",'w')
+	 	f.write(n.XMLDesc())
+	 	f.close()
+	 	l.append(n.name())
+	for i in l:
+		tree = ET.parse(i+".xml")
+		root = tree.getroot()
+		for f in root.iter():
+			print f.attrib
+
+	return {"retorno":"nada"}
 
 
 
