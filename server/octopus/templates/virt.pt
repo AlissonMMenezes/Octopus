@@ -61,7 +61,12 @@
 				<div id="vms-box-lista-title">Networks</div>	
 				<div id="vms-box-content">		
 					<button>Nova</button>
-					<div>REDES!</div>
+					<div id="vms-box-lista-title">Rede: <span id='nome-rede'></span></div>
+					<div id="vms-box-content">		
+						<div>Bridge: <span id='bridge-rede'></span></div>
+						<div>IP: <span id='ip-rede'></span></div>
+						<div>Range: <span id='range-rede'></span></div>
+					</div>
 				</div>
 			</div>
 		</section>

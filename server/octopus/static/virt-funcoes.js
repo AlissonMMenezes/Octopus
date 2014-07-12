@@ -73,7 +73,6 @@ $(document).ready(function(){
 	});
 
 	function get_net(){		
-		alert("passou aqui!");
 		$.ajax({
 				type: 'POST',
 				url: '/get_networks', //url to submit
@@ -81,7 +80,12 @@ $(document).ready(function(){
 				contentType: 'application/json; charset=utf-8'
 				})
 				.done(function(JsonData){			
-					alert(JsonData.retorno);
+					console.log(JsonData.retorno);
+					$("#nome-rede").text(JsonData.retorno.name[1]);
+					$("#ip-rede").text(JsonData.retorno.ip[0].address);
+					$("#bridge-rede").text(JsonData.retorno.bridge[0].name);
+					$("#range-rede").text(JsonData.retorno.range[0].start+" - "+JsonData.retorno.range[0].end);
+					//$("#nome-rede").text(JsonData.retorno.range[0].end);
 				})
 				.fail(function(JsonData){
 					alert("Falhou! contate o admin de sistemas!");

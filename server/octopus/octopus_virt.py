@@ -67,6 +67,7 @@ def access_console(data):
 	return {"retorno":port}
 
 def get_networks(data):
+	netw = {}
 	l = []
 	c = con_hypervisor()
 	nets = c.listAllNetworks()
@@ -80,9 +81,8 @@ def get_networks(data):
 		tree = ET.parse(i+".xml")
 		root = tree.getroot()
 		for f in root.iter():
-			print f.attrib
-
-	return {"retorno":"nada"}
+			netw[f.tag] = f.attrib, f.text
+	return {"retorno":netw}
 
 
 
