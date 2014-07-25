@@ -176,6 +176,7 @@ class OctopusWeb(object):
 	def vmconsole_view(self):	
 		request = self.request
 		r = v.access_console(request.json_body)
+		print r
 		return r
 
 	@view_config(renderer="json", name="get_networks",permission="admin")

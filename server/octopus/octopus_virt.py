@@ -15,7 +15,8 @@ import os
 import pprint
 
 def con_hypervisor():
-	conn = libvirt.open("qemu:///system")
+	conn = libvirt.open("qemu+ssh://root@10.100.0.1/system")	
+	print conn.getHostname()
 	return conn
 
 def get_Vms():
@@ -64,7 +65,8 @@ def access_console(data):
 		print f.attrib
 		port = f.get('port')
 	os.remove(info.name()+".xml")
-	return {"retorno":port}
+	h = c.getHostname()
+	return {"hostname":h,"port":port}
 
 def get_networks(data):
 	netw = {}
