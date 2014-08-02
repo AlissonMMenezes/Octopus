@@ -165,6 +165,18 @@ class OctopusWeb(object):
 		request = self.request
 		AllVms = v.get_Vms()
 		return {"layout":self.site_layout(),"AllVms":AllVms}
+		
+	@view_config(renderer="json", name="create_vm",permission="admin")
+	def create_vm_view(self):	
+		request = self.request
+		r = v.create_vm(request.json_body)
+		return r
+	
+	@view_config(renderer="json", name="get_iso",permission="admin")
+	def get_iso_view(self):	
+		request = self.request
+		r = v.get_iso(request.json_body)
+		return r
 
 	@view_config(renderer="json", name="vm_action",permission="admin")
 	def vmaction_view(self):	

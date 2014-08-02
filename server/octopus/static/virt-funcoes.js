@@ -21,6 +21,54 @@ $(document).ready(function(){
 					alert("Erro!");
 		});		
 	});
+	
+	$("#nova-vm").click(function(){
+		$("#tabela-vms").css("display","none");
+		$("#vm-box-nova").slideToggle();	
+		$.ajax({
+				type: 'POST',
+				url: '/get_iso', //url to submit
+				data: JSON.stringify({"vm":'nada'}),
+				contentType: 'application/json; charset=utf-8'
+				})
+				.done(function(JsonData){
+					list = JsonData.retorno;
+					for(var i = 0; i < list.length; i++){
+						$("#combo-iso").append(new Option(list[i],list[i]));
+					}
+					//window.location.reload();
+				})
+				.fail(function(JsonData){
+					alert("Erro!");
+		});
+					
+	});
+	$("#fecha-div-vm").click(function(){
+		$("#vm-box-nova").slideToggle("","",function(){
+			$("#tabela-vms").css("display","block");		
+		});				
+	});
+	$("#salvar-vm").click(function(){
+		vmname = $("#vm-name").val();
+		vmcpu = $("#vm-cpu").val();
+		vmmem = $("#vm-mem").val();
+		vmdisk = $("#vm-disk").val();
+		vmiso = $("#combo-iso").val();
+		$.ajax({
+				type: 'POST',
+				url: '/create_vm', //url to submit
+				data: JSON.stringify({"vm-name":vmname,"vm-cpu":vmcpu,"vm-mem":vmmem,"vm-disk":vmdisk,"vm-iso":vmiso}),
+				contentType: 'application/json; charset=utf-8'
+				})
+				.done(function(JsonData){			
+					alert(JsonData.retorno);
+					window.location.reload();
+				})
+				.fail(function(JsonData){
+					alert("Erro!");
+		});
+
+	});
 
 	$(".acessar_console").click(function(){
 		var nome = $(this).attr("id");
@@ -35,7 +83,7 @@ $(document).ready(function(){
 				})
 				.done(function(JsonData){			
 					if(JsonData.hostname){
-						alert("Voce precisa ter o spicy instalado: spicy -h "+JsonData.hostname+" -p "+JsonData.port);
+						alert("Use o VNC para acessar: "+JsonData.hostname+":"+JsonData.port);
 					}else{
 						alert("Erro! Talvez a maquina esteja desligada");
 					}
@@ -89,4 +137,5 @@ $(document).ready(function(){
 	});
 
 });
+
 

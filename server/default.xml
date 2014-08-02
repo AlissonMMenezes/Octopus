@@ -1,6 +1,6 @@
 <network>
   <name>default</name>
-  <uuid>92f3a754-7ced-4140-8595-1f23bf813a64</uuid>
+  <uuid>1fb0f176-e9d6-4a55-9ac7-cebf411e679e</uuid>
   <forward mode='nat'>
     <nat>
       <port start='1024' end='65535'/>
