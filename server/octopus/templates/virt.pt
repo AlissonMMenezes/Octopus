@@ -19,12 +19,25 @@
 				</ul>
 			</div>
 		</div>	
-		<section id="main" class="sect">
+		<section id="main" class="sect">		
 		<div id="vms-box-lista">
 		<div id="vms-box-lista-title">VMs</div>	
 		<div id="vms-box-content">		
-			<table >
-				<tr><td><button>Nova</button></td></tr>
+		<div id="vm-box-nova" style="display:none;">
+			<div id="vm-box-nova-title">Nova Maquina Virtual</div>	
+			<div id="vm-box--nova-content">		
+				Nome: <input type="text" size="15" placeholder="Nome da maquina virtual" id="vm-name"><br>
+				CPU: <input type="number" min='1' max='4' required id='vm-cpu'><br>
+				Memoria: <input type="text" size="15" placeholder="Memoria em MB!" id='vm-mem'><br>
+				Disco: <input type="number" min='1' required id='vm-disk'> GB<br>
+				ISO: <select id='combo-iso'>
+						<option>Nenhum</option>
+					</select><br>
+			</div>
+		<button id="salvar-vm">Criar</button><button id="fecha-div-vm">Fechar</button>
+		</div>
+			<table id="tabela-vms">
+				<tr><td><button id="nova-vm">Nova</button></td></tr>
 				<tr><td>Nome</td><td>Status</td><td>vCPUs</td><td>Memoria</td><td>Ação</td></tr>
 				<tal:block tal:repeat="v AllVms">
 					<tr class="vms-box-item">
@@ -49,7 +62,8 @@
 								<option>Apagar</option>
 							</select>
 						</td>
-						<td><button class="acessar_console" id="${v.name()}">Acessar console</button></td>
+						<td><button class="acessar_console" id="${v.name()}">Editar</button></td>
+						<td><button class="acessar_console" id="${v.name()}">Console</button></td>						
 					</tr>
 				</tal:block>		
 			</table>
@@ -97,4 +111,5 @@
 		</section>
 	</metal:block>
 </metal:block>
+
 

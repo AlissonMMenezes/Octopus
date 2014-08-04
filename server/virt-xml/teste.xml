@@ -1,0 +1,8 @@
+<volume>
+  <name>teste.img</name>
+  <allocation>0</allocation>
+  <capacity unit="G">5</capacity>
+  <target>
+	<path>/home/octopus/Vteste/teste.img</path>
+  </target>
+</volume> 

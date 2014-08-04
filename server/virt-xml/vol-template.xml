@@ -1,0 +1,8 @@
+<volume>
+  <name>VM-NAME.img</name>
+  <allocation>0</allocation>
+  <capacity unit="G">VM-DISK</capacity>
+  <target>
+    <path>/home/octopus/VM-NAME/VM-NAME.img</path>
+  </target>
+</volume> 

@@ -1,0 +1,7 @@
+<pool type="dir">
+  <name>Storage</name>
+  <uuid>33a5c045-645a-2c00-e56b-927cdf34e17a</uuid>
+  <target>
+    <path>/home/octopus/storage</path>
+  </target>
+</pool>
