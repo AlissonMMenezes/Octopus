@@ -1,4 +1,4 @@
-<network>
+<network connections='1'>
   <name>default</name>
   <uuid>92f3a754-7ced-4140-8595-1f23bf813a64</uuid>
   <forward mode='nat'>

@@ -28,7 +28,7 @@ body {
 	color: #ffffff;
 }
 
-#grupos-box, #feet-box, #input-box, #nodes-box, #node-box-info, #bacula-box, #menu-virt {	
+#grupos-box, #grupos-box-info, #feet-box, #input-box, #nodes-box, #node-box-info, #bacula-box, #menu-virt {	
 	position: relative;
 	display:block;
 	border-radius: 5px;
@@ -63,7 +63,7 @@ body {
 	line-height: 1.428571429;
 	
 }
-#grupos-box-title, #feet-box-title, #input-box-title, #output-box-title, #code-box-title, #nodes-box-title,#node-box-info-title, #bacula-box-title,#menu-virt-title, #vms-box-lista-title {
+#grupos-box-title, #grupos-box-info-title, #feet-box-title, #input-box-title, #output-box-title, #code-box-title, #nodes-box-title,#node-box-info-title, #bacula-box-title,#menu-virt-title, #vms-box-lista-title {
 	background-color:#ecf0f1;
 	font-weight: bold;	
 	color:#7b8a8b;
@@ -127,8 +127,6 @@ body {
 #login-panel-content, #login-panel-title {
 	padding: 15px;
 	margin: 0px auto;
-
-
 }
 
 #novogrupo:hover, .grupos-nome:hover, .nodes-name:hover, .foot-name:hover, .bacula-name:hover, .virt-menu-item:hover{

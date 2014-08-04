@@ -17,7 +17,7 @@ $(document).ready(function(){
 				contentType: 'application/json; charset=utf-8'
 				})
 				.done(function(JsonData){			
-					alert(JsonData.retorno);
+					//alert(JsonData.retorno);
 					window.location.reload();
 				})
 				.fail(function(JsonData){
