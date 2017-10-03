@@ -1,8 +1,8 @@
 
 <head>
 <title>Octopus IT Automation Tool</title>
-<script src="static/jquery.js"></script>
-<script src="static/funcoes.js"></script>
+<script src="/static/jquery.js"></script>
+<script src="/static/funcoes.js"></script>
 <link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
 <metal:block use-macro="layout">
